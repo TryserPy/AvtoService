@@ -99,3 +99,23 @@
     x0 = null;
   });
 })();
+(function () {
+  'use strict';
+
+  // Несколько номеров у мессенджеров: на телефоне первое нажатие показывает номер, второе открывает ссылку.
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.social[data-num]'));
+  if (!chips.length || !window.matchMedia) return;
+  var touch = window.matchMedia('(hover: none)');
+  function closeAll(except) { chips.forEach(function (c) { if (c !== except) c.classList.remove('is-open'); }); }
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function (e) {
+      if (!touch.matches || chip.classList.contains('is-open')) return;
+      e.preventDefault();
+      closeAll(chip);
+      chip.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest || !e.target.closest('.social[data-num]')) closeAll(null);
+  });
+})();
