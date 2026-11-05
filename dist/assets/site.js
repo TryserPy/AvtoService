@@ -104,7 +104,7 @@
 
   // Несколько номеров у мессенджеров: на телефоне первое нажатие выдвигает номер под рядом кнопок
   // (кнопки не двигаются), второе открывает ссылку.
-  var chips = Array.prototype.slice.call(document.querySelectorAll('.social[data-num]'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.social[data-num]')).filter(function (c) { return c.querySelector('.social__idx'); });
   if (!chips.length || !window.matchMedia) return;
   var touch = window.matchMedia('(hover: none)');
   var row = chips[0].parentNode;

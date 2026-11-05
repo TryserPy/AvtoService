@@ -154,7 +154,7 @@ p{margin:0}
 .socials{display:flex;flex-wrap:wrap;gap:8px}
 .social{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:600;text-decoration:none}
 .social{position:relative}
-.social[data-num]{padding-left:8px}
+.social:has(>.social__idx){padding-left:8px}
 .social__idx{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:8px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700}
 .social[data-num]::after{content:attr(data-num);white-space:nowrap;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
 @media (hover:hover){
