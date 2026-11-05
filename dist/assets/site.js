@@ -102,20 +102,40 @@
 (function () {
   'use strict';
 
-  // Несколько номеров у мессенджеров: на телефоне первое нажатие показывает номер, второе открывает ссылку.
+  // Несколько номеров у мессенджеров: на телефоне первое нажатие выдвигает номер под рядом кнопок
+  // (кнопки не двигаются), второе открывает ссылку.
   var chips = Array.prototype.slice.call(document.querySelectorAll('.social[data-num]'));
   if (!chips.length || !window.matchMedia) return;
   var touch = window.matchMedia('(hover: none)');
-  function closeAll(except) { chips.forEach(function (c) { if (c !== except) c.classList.remove('is-open'); }); }
+  var row = chips[0].parentNode;
+  var hint = document.createElement('div');
+  hint.className = 'social-hint';
+  hint.setAttribute('aria-live', 'polite');
+  hint.innerHTML = '<div class="social-hint__in"><div class="social-hint__box">' +
+    '<span class="social-hint__num"></span><span class="social-hint__tip">Нажмите ещё раз, чтобы открыть</span></div></div>';
+  row.parentNode.insertBefore(hint, row.nextSibling);
+  var num = hint.querySelector('.social-hint__num');
+  var box = hint.querySelector('.social-hint__box');
+
+  function closeAll() {
+    chips.forEach(function (c) { c.classList.remove('is-open'); });
+    hint.classList.remove('is-shown');
+  }
+  function open(chip) {
+    var again = hint.classList.contains('is-shown');
+    chips.forEach(function (c) { c.classList.toggle('is-open', c === chip); });
+    num.textContent = chip.getAttribute('aria-label');
+    if (again) { box.style.transition = 'none'; box.style.opacity = '0'; box.style.transform = 'translateX(-24px)'; void box.offsetWidth; box.style.cssText = ''; }
+    hint.classList.add('is-shown');
+  }
   chips.forEach(function (chip) {
     chip.addEventListener('click', function (e) {
       if (!touch.matches || chip.classList.contains('is-open')) return;
       e.preventDefault();
-      closeAll(chip);
-      chip.classList.add('is-open');
+      open(chip);
     });
   });
   document.addEventListener('click', function (e) {
-    if (!e.target.closest || !e.target.closest('.social[data-num]')) closeAll(null);
+    if (!e.target.closest || !e.target.closest('.social[data-num]')) closeAll();
   });
 })();
