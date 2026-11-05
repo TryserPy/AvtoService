@@ -111,8 +111,8 @@
   var hint = document.createElement('div');
   hint.className = 'social-hint';
   hint.setAttribute('aria-live', 'polite');
-  hint.innerHTML = '<div class="social-hint__in"><div class="social-hint__box">' +
-    '<span class="social-hint__num"></span><span class="social-hint__tip">Нажмите ещё раз, чтобы открыть</span></div></div>';
+  hint.innerHTML = '<div class="social-hint__in"><a class="social-hint__box" target="_blank" rel="noopener">' +
+    '<span class="social-hint__num"></span><span class="social-hint__tip">Нажмите, чтобы открыть</span></a></div>';
   row.parentNode.insertBefore(hint, row.nextSibling);
   var num = hint.querySelector('.social-hint__num');
   var box = hint.querySelector('.social-hint__box');
@@ -125,6 +125,7 @@
     var again = hint.classList.contains('is-shown');
     chips.forEach(function (c) { c.classList.toggle('is-open', c === chip); });
     num.textContent = chip.getAttribute('aria-label');
+    box.href = chip.href;
     if (again) { box.style.transition = 'none'; box.style.opacity = '0'; box.style.transform = 'translateX(-24px)'; void box.offsetWidth; box.style.cssText = ''; }
     hint.classList.add('is-shown');
   }
@@ -136,6 +137,6 @@
     });
   });
   document.addEventListener('click', function (e) {
-    if (!e.target.closest || !e.target.closest('.social[data-num]')) closeAll();
+    if (!e.target.closest || !e.target.closest('.social[data-num], .social-hint')) closeAll();
   });
 })();
