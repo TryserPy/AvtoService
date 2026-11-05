@@ -15,7 +15,8 @@
 </head>
 <body>
 <div class="demo-bar" role="note">Демо-концепт, не официальный сайт, удалим по первой просьбе</div>
-<header class="hero">
+<header class="hero hero--photo">
+  <img class="hero__bg" src="img/hero.jpg" alt="" fetchpriority="high">
   <div class="hero__inner wrap">
     <p class="hero__kicker">Автосервис · Курчатовский район</p>
     <h1 class="hero__title">АВТО+174</h1>
@@ -38,6 +39,23 @@
     <h2 class="section__title">Услуги</h2>
     <ul class="service-tags"><li>Кузовной ремонт</li><li>Ремонт бензиновых двигателей</li><li>Ремонт ходовой части</li><li>Ремонт МКПП</li><li>Ремонт выхлопных систем</li><li>Компьютерная диагностика</li><li>Установка и ремонт автостёкол</li><li>Установка и ремонт автооптики</li><li>Автозвук</li><li>Запчасти для иномарок</li></ul>
     <p class="ask">Цены уточняйте по телефону <a href="tel:+79681246480">+7 968 124-64-80</a></p>
+  </div>
+</section>
+<section class="section section--alt" id="photos">
+  <div class="wrap">
+    <h2 class="section__title">Фото сервиса</h2>
+  </div>
+  <div class="carousel" data-carousel>
+    <div class="carousel__track gallery">
+      <button class="gallery__item" type="button" data-full="img/1.jpg" aria-label="Открыть фото: Кузовной ремонт после аварии, АВТО+174"><img src="img/1.jpg" alt="Кузовной ремонт после аварии, АВТО+174" loading="lazy" width="1192" height="891"></button>
+      <button class="gallery__item" type="button" data-full="img/2.jpg" aria-label="Открыть фото: Ремонт переднего бампера, АВТО+174"><img src="img/2.jpg" alt="Ремонт переднего бампера, АВТО+174" loading="lazy" width="654" height="892"></button>
+      <button class="gallery__item" type="button" data-full="img/3.jpg" aria-label="Открыть фото: Здание мастерской АВТО+174"><img src="img/3.jpg" alt="Здание мастерской АВТО+174" loading="lazy" width="675" height="904"></button>
+    </div>
+    <div class="carousel__nav wrap">
+      <button class="carousel__btn" type="button" data-prev aria-label="Назад">‹</button>
+      <span class="carousel__count" data-counter></span>
+      <button class="carousel__btn" type="button" data-next aria-label="Вперёд">›</button>
+    </div>
   </div>
 </section>
 <section class="section" id="praise">
